@@ -15,7 +15,10 @@ interface Game {
 const App = () => {
   const [game, setGames] = useState<Game[]>([])
   const [selectedGenre, setSelectedGenre] = useState<string>("")
-  const [searhcTerm, setSearchTerm] = useState<string>("")
+  const [searchTerm, setSearchTerm] = useState<string>("")
+  const [mode,setMode] = useState<boolean>(false)
+
+    const toggleMode = () => setMode(!mode);
 
   useEffect(() => {
     fetch("https://api.allorigins.win/raw?url=https://www.freetogame.com/api/games")
@@ -25,37 +28,39 @@ const App = () => {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-screen overflow-hidden">
+    <div className={`relative z-60  min-h-screen w-screen overflow-hidden ${mode ? "light-mode" : "dark-mode"} `}>
       {/* particles background */}
-      <div className="fixed inset-0 -z-10">
-     <Particles
-    particleColors={['#ffffff', '#ffffff']}
-    particleCount={200}
-    particleSpread={10}
-    speed={0.08}
-    particleBaseSize={105}
-    moveParticlesOnHover={true}
-    alphaParticles={0.5}
-    
-    disableRotation={false}
-  />
+      <div className="fixed inset-0 -z-1 pointer-events-none">
+ <Particles
+  key={mode ? "dark" : "light"}   // 👈 force remount on toggle
+  particleColors={mode ? ['#503188', '#503188']:['#ffffff', '#ffffff']}
+  particleCount={500}
+  particleSpread={10}
+  speed={0.06}
+  particleBaseSize={100}
+  moveParticlesOnHover={true}
+  alphaParticles={0.2}
+  disableRotation={false}
+/>
       </div>
-
+    
       {/* menu */}
-      <div className="bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e]">
-        <Menu setSearchTerm={setSearchTerm} />
+      <div className={`${mode ? "bg-darkCustom" : "bg-lightCustom"}`}>
+        <Menu setSearchTerm={setSearchTerm} mode ={mode} toggleMode={toggleMode}/>
       </div>
 
       {/* body */}
-      <div className="mt-[5rem] flex">
-        {/* sideBar */}``
-        <div className="w-[15rem] p-4 fixed top-[80px] h-[calc(100vh-80px)] overflow-auto  border border-gray-800 border-b-0">
-          <SideBar games={game} setSelectedGenre={setSelectedGenre} />
+      <div className="pt-[80px] flex z-10">
+        {/* sideBar */}
+        <div className={`w-[13rem] p-4 fixed top-[80px] h-[calc(100vh-80px)] overflow-auto   border-t border-l border-r ${mode? "border-light":"border-dark" } `}>
+          <SideBar games={game} setSelectedGenre={setSelectedGenre } mode = {mode}/>
         </div>
 
         {/* main body */}
-        <div className="ml-[14rem] flex-1 overflow-y-auto p-6  border border-gray-800">
-          <MainContent content={game} selectedGenre={selectedGenre} searchTerm={searhcTerm} />
+        <div   className={`ml-[13rem] flex-1 overflow-auto p-6 pt-2 border-t border-l border-r ${
+    mode ? "border-light" : "border-dark"
+  }`}>
+          <MainContent content={game} selectedGenre={selectedGenre} searchTerm={searchTerm} mode={mode}/>
         </div>
       </div>
     </div>
