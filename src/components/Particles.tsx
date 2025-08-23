@@ -14,6 +14,7 @@ interface ParticlesProps {
   cameraDistance?: number;
   disableRotation?: boolean;
   className?: string;
+
 }
 
 const defaultColors: string[] = ["#ffffff", "#ffffff", "#ffffff"];

@@ -28,9 +28,9 @@ const App = () => {
   }, [])
 
   return (
-    <div className={`relative z-60  min-h-screen w-screen overflow-hidden ${mode ? "light-mode" : "dark-mode"} `}>
+    <div className={`relative z-60  min-h-screen w-screen overflow-hidden  `}>
       {/* particles background */}
-      <div className="fixed inset-0 -z-1 pointer-events-none">
+      <div className={`fixed top-0 left-0 w-full inset-0 -z-20 pointer-events-none  ${mode ? "light-mode" : "dark-mode"}`}>
  <Particles
   key={mode ? "dark" : "light"}   // 👈 force remount on toggle
   particleColors={mode ? ['#503188', '#503188']:['#ffffff', '#ffffff']}
@@ -52,12 +52,12 @@ const App = () => {
       {/* body */}
       <div className="pt-[80px] flex z-10">
         {/* sideBar */}
-        <div className={`w-[13rem] p-4 fixed top-[80px] h-[calc(100vh-80px)] overflow-auto   border-t border-l border-r ${mode? "border-light":"border-dark" } `}>
+        <div className={`w-[11.5rem] p-4 fixed top-[80px] h-[calc(100vh-80px)] overflow-auto    border-t border-l border-r ${mode? "border-light":"border-dark" } `}>
           <SideBar games={game} setSelectedGenre={setSelectedGenre } mode = {mode}/>
         </div>
 
         {/* main body */}
-        <div   className={`ml-[13rem] flex-1 overflow-auto p-6 pt-2 border-t border-l border-r ${
+        <div   className={`ml-[11.4rem] flex-1 overflow-auto p-6 pt-2 border-t border-l border-r  ${
     mode ? "border-light" : "border-dark"
   }`}>
           <MainContent content={game} selectedGenre={selectedGenre} searchTerm={searchTerm} mode={mode}/>

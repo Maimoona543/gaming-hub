@@ -3,7 +3,7 @@ import windows from '../assets/windows.png'
 import web from '../assets/web.png'
 import { TypeAnimation } from "react-type-animation";
 import lightWeb from '../assets/lightWeb.png';
-import ligthWindow from '../assets/lightWindow.png';
+import lightWindow from '../assets/lightWindow.png';
 
 interface ProfileProps{
 id:number;
@@ -78,7 +78,7 @@ const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) =
           fontSize: "18px",
           fontWeight: "bold",
           color: "white", // white text
-          textShadow: "4px 4px 8px #3024D7]", // glow only for text
+          textShadow: "4px 4px 6px #3024D7", // glow only for text
           display: "inline-block",
         }}
       />
@@ -86,7 +86,7 @@ const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) =
 
 
       {/* top content */}
-<div className="flex flex-row justify-between items-start">
+<div className="flex flex-row justify-between items-start ">
   {/* heading*/}
   <div>
     <h1 className={` text-5xl font-medium pb-[1rem] ${mode ? "text-black" : "text-white"}` }>
@@ -101,8 +101,8 @@ const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) =
       <select
         className={`  text-base py-2 pl-4 pr-[5rem] rounded-xl shadow-md border  
   ${ mode 
-      ? "text-black bg-gray-300"   // ✅ Light mode
-      : "text-white bg-gray-800 border-gray-500" // ✅ Dark mode
+      ? "text-black bg-gray-300"   //  Light mode
+      : "text-white bg-gray-800 border-gray-500" // Dark mode
   }
 `}
         value={sortOption}
@@ -119,8 +119,8 @@ const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) =
       <select
         className={`  text-base py-2 pl-4 pr-[4rem] rounded-xl shadow-md border  
   ${ mode 
-      ? "text-black bg-gray-300"   // ✅ Light mode
-      : "text-white bg-gray-800 border-gray-500" // ✅ Dark mode
+      ? "text-black bg-gray-300"   //  Light mode
+      : "text-white bg-gray-800 border-gray-500" //  Dark mode
   }
 `}
         value={sortPlatform}
@@ -137,54 +137,93 @@ const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) =
 
 
 
-
-    {/* maiin-content */}
-    <div className={` grid grid-cols-4 gap-3 relative     p-4 rounded-xl transition duration-300 
-    border 
-    hover:shadow-[0_0_25px_#3024D7]
-    hover:border-[#3024D7]   ${mode ? "border-light" : "border-dark"}`}>
-    {profile.length > 0 ?(
-    profile.map((p) => (
-        <div key={p.id} className={` transition duration-300 
-    border 
-    rounded-2xl
-    hover:scale-105 
-    ${mode ? "border-light" : "border-dark"}`}>
-
-            {/* games-Profile-Img */}
-            <div>
-                <img className={`rounded-tl-lg rounded-tr-lg `} src={p.thumbnail} alt={p.title}/>
-            </div>
-
-            {/* Profile-Data */}
-            <div className={`   bg-opacity-100 rounded-br-lg rounded-bl-lg ${mode ? "bg-gray-300":"bg-[#212D48]"}`}>
-            <div className="flex flex-row items-center p-2 relative pt-3">
-                <strong  className={`truncate block w-40 ${mode ? "text-black":"text-white"}`}>{p.title}</strong>
-                <p className={`absolute right-3 px-2 text-sm bg-opacity-15 rounded  ${p.id <= 150 ?" bg-red-600 text-red-800 " :p.id <= 300 ? "bg-yellow-600 text-yellow-800" :p.id <= 450  ? "bg-[#18BFDC] text-[#18BFDC]":  "bg-green-600 text-green-800"}`}>{p.id}</p>
-            </div>
-
-            {/* genre */}
-            <div className="flex flex-row items-center pl-2 pb-2">
-                <p className="text-gray-200 text-sm">{p.genre}</p>
-                <div>
-              {p.platform.toLowerCase().includes("pc") && (
-   <img className="h-[0.9rem] color-gray-200 ml-[10px] object-cover" src={mode ? ligthWindow:windows} alt="Windows" />
-)}
-{p.platform.toLowerCase().includes("web") && (
-   <img className="h-[0.9rem] ml-[10px] object-cover"  src={mode ? lightWeb:web} alt="Web"  />
-)}
-                </div>
-            </div>
-            </div>
+{/* maiin-content */}
+  {profile.length === 0 ? (
+        <div className="flex items-center justify-center w-full h-[calc(100vh-80px)]">
+          <div className="flex flex-col items-center text-gray-400">
+            <span className="text-6xl mb-4">😢</span>
+            <p className="text-lg">No games found</p>
+          </div>
         </div>
-    ))  ) : (
-     <div className="fixed inset-0 flex flex-col items-center justify-center text-gray-400">
-  <span className="text-6xl mb-4">😢</span>
-  <p className="text-lg">No games found</p>
+      ) : (
+        <div
+  className={`grid grid-cols-4 gap-3 p-3 ml-[-0.8rem] mr-[-0.9rem] rounded-xl transition duration-300 border
+    hover:shadow-[0_0_25px_#3024D7] hover:border-[#3024D7]
+    ${mode ? "border-light" : "border-dark"}`}
+>
+  {profile.map((p) => (
+    <div
+      key={p.id}
+      className="transition duration-300 hover:scale-105 hover:shadow-[0_0_7px_#838383] hover:border-[#000000] rounded-lg overflow-hidden bg-transparent"
+    >
+      {/* card wrapper makes width consistent */}
+      <div className="w-full">
+        {/* game image */}
+        <img
+          className="w-full object-cover rounded-t-lg"
+          src={p.thumbnail}
+          alt={p.title}
+        />
+
+        {/* game info */}
+        <div
+          className={`w-full bg-opacity-100 rounded-b-lg ${
+            mode ? "bg-gray-300" : "bg-[#212D48]"
+          }`}
+        >
+          <div className="flex flex-row items-center p-2 relative pt-3">
+            <strong
+              className={`truncate block ${mode ? "text-black" : "text-white"}`}
+            >
+              {p.title}
+            </strong>
+            <p
+              className={`absolute right-3 px-2 text-sm bg-opacity-15 rounded  
+                ${
+                  p.id <= 150
+                    ? "bg-red-600 text-red-800"
+                    : p.id <= 300
+                    ? "bg-yellow-600 text-yellow-800"
+                    : p.id <= 450
+                    ? "bg-[#18BFDC] text-[#18BFDC]"
+                    : "bg-green-600 text-green-800"
+                }`}
+            >
+              {p.id}
+            </p>
+          </div>
+
+          {/* genre + platform */}
+          <div className="flex flex-row items-center pl-2 pb-2">
+            <p
+              className={`text-sm ${
+                mode ? "text-gray-600" : "text-gray-200"
+              }`}
+            >
+              {p.genre}
+            </p>
+            {p.platform.toLowerCase().includes("pc") && (
+              <img
+                className="h-[0.9rem] ml-2 object-cover"
+                src={mode ? lightWindow : windows}
+                alt="Windows"
+              />
+            )}
+            {p.platform.toLowerCase().includes("web") && (
+              <img
+                className="h-[0.9rem] ml-2 object-cover"
+                src={mode ? lightWeb : web}
+                alt="Web"
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
 </div>
 
-    )}
-    </div>
+      )}
     </div>
   )
 }

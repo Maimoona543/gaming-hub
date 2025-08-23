@@ -5,9 +5,7 @@
 .my-class {
     font-family: 'Quicksand', sans-serif;
 }
-.text-shadow {
-  text-shadow: 2px 2px 4px rgba(255, 250, 250, 0.734);
-}
+
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
 .font-gaming {
@@ -23,6 +21,7 @@
   background-image: linear-gradient(to top, #e5e5e5, #e7e7e7, #e9e9e9, #ebebeb, #ededed);
 }
 
+
 .bg-darkCustom {
   background-color: #15101b;
 }
@@ -35,3 +34,4 @@
 .custom-color{
   color:#3024D7
 }
+
