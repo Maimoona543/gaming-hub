@@ -61,9 +61,9 @@ const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) =
         setProfile(filtered)
     },[selectedGenre,content,searchTerm,sortOption,sortPlatform])
   return (
-    <div className=" ">
+    <div className="">
      {/* welcome banner */}
-    <div className="flex justify-center items-center  h-[20px] ml-[-3rem]">
+    <div className="flex justify-center items-center  h-[20px] md:ml-[-3rem] max-xl:pb-[2rem] max-xl:pt-[0.8rem] pt-[1rem]">
       <TypeAnimation
         sequence={[
           "🎮 Welcome to Gaming Hub", 2500,
@@ -85,54 +85,79 @@ const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) =
     </div>
 
 
-      {/* top content */}
-<div className="flex flex-row justify-between items-start ">
-  {/* heading*/}
-  <div>
-    <h1 className={` text-5xl font-medium pb-[1rem] ${mode ? "text-black" : "text-white"}` }>
+{/* top content */}
+<div className="flex flex-col  md:flex-row md:pb-[2rem] pb-[1rem] md:justify-between md:items-center md:gap-3 gap-1">
+  
+ {/* heading */}
+  <div className="flex flex-col md:items-center items-start">
+    <h1
+      className={`
+        text-2xl md:text-4xl lg:text-5xl 
+        font-medium pb-[1rem]
+        ${mode 
+          ? "text-black text-shadow-black" 
+          : "text-white text-shadow-white"}
+      `}
+    >
       {selectedGenre ? `${selectedGenre} Games` : "All Games"} ({profile.length})
     </h1>
   </div>
 
-  {/* sorting/filtering */}
-  <div className="flex flex-row space-x-2">
+  {/* sorting/filtering (always row) */}
+  <div className="flex flex-row md:gap-1 gap-3">
     {/* relevance sorting */}
     <div>
-      <select
-        className={`  text-base py-2 pl-4 pr-[5rem] rounded-xl shadow-md border  
-  ${ mode 
-      ? "text-black bg-gray-300"   //  Light mode
-      : "text-white bg-gray-800 border-gray-500" // Dark mode
-  }
-`}
-        value={sortOption}
-        onChange={(e) => setSortOption(e.target.value)}
-      >
-        <option value="relevance" className="text-xl">Relevance</option>
-        <option value="id" className="text-xl">ID</option>
-        <option value="name" className="text-xl">Name</option>
-      </select>
+
+    <select
+      className={`
+        text-sm sm:text-base md:text-lg
+        py-1 sm:py-2
+        pl-2 sm:pl-4
+        pr-6 sm:pr-10 md:pr-13
+        rounded-md sm:rounded-xl
+        shadow-md border
+        ${ mode 
+          ? "text-black bg-gray-300" 
+          : "text-white bg-gray-800 border-gray-500"
+        }
+      `}
+      value={sortOption}
+      onChange={(e) => setSortOption(e.target.value)}
+    >
+      <option value="relevance">Relevance</option>
+      <option value="id">ID</option>
+      <option value="name">Name</option>
+    </select>
     </div>
 
     {/* platform filtering */}
     <div>
-      <select
-        className={`  text-base py-2 pl-4 pr-[4rem] rounded-xl shadow-md border  
-  ${ mode 
-      ? "text-black bg-gray-300"   //  Light mode
-      : "text-white bg-gray-800 border-gray-500" //  Dark mode
-  }
-`}
-        value={sortPlatform}
-        onChange={(e) => setSortPlatform(e.target.value)}
-      >
-        <option value="all platform" className="text-xl">All Platforms</option>
-        <option value="pc games" className="text-xl">PC Games</option>
-        <option value="web games" className="text-xl">Web Games</option>
-      </select>
+
+    <select
+      className={`
+        text-sm sm:text-base md:text-lg
+        py-1 sm:py-2
+        pl-2 sm:pl-4
+        pr-6 sm:pr-12 md:pr-11
+        rounded-md sm:rounded-xl
+        shadow-md border
+        ${ mode 
+          ? "text-black bg-gray-300" 
+          : "text-white bg-gray-800 border-gray-500"
+        }
+      `}
+      value={sortPlatform}
+      onChange={(e) => setSortPlatform(e.target.value)}
+    >
+      <option value="all platform">All Platforms</option>
+      <option value="pc games">PC Games</option>
+      <option value="web games">Web Games</option>
+    </select>
     </div>
   </div>
+
 </div>
+
 
 
 
@@ -147,14 +172,14 @@ const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) =
         </div>
       ) : (
         <div
-  className={`grid grid-cols-4 gap-3 p-3 ml-[-0.8rem] mr-[-0.9rem] rounded-xl transition duration-300 border
-    hover:shadow-[0_0_25px_#3024D7] hover:border-[#3024D7]
-    ${mode ? "border-light" : "border-dark"}`}
+   className={`grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-3 md:p-3 ml-[-0.8rem] mr-[-0.9rem] rounded-xl transition duration-300 md:border
+    md:hover:shadow-[0_0_25px_#3024D7] md:hover:border-[#3024D7]
+    ${mode ? "border-light " : "border-dark-visible"}`}
 >
   {profile.map((p) => (
     <div
       key={p.id}
-      className="transition duration-300 hover:scale-105 hover:shadow-[0_0_7px_#838383] hover:border-[#000000] rounded-lg overflow-hidden bg-transparent"
+      className="transition duration-300  hover:shadow-[0_0_25px_#3024D7] hover:border-[#3024D7] hover:scale-105 md:hover:shadow-[0_0_7px_#838383] hover:border-[#000000] rounded-md overflow-hidden"
     >
       {/* card wrapper makes width consistent */}
       <div className="w-full">

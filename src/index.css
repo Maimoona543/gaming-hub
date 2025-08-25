@@ -25,12 +25,20 @@
 .bg-darkCustom {
   background-color: #15101b;
 }
-
-.bg-lightCustom {
-  background-color: #e5e5e5;
+.border-dark {
+  border-color: #444 !important;
 }
 
+.border-dark-visible {
+  border-color: #2c2c2c !important; /* slightly lighter than background */
+}
 
+ .text-shadow-white {
+  text-shadow: 0 0 10px #ffffff;
+}
+.text-shadow-black{
+   text-shadow: 0 0 4px #000000;
+}
 .custom-color{
   color:#3024D7
 }

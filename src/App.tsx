@@ -21,7 +21,7 @@ const App = () => {
     const toggleMode = () => setMode(!mode);
 
   useEffect(() => {
-    fetch("https://api.allorigins.win/raw?url=https://www.freetogame.com/api/games")
+    fetch("https://api.allorigins.win/raw?url=https://www.freetogame.com/api/games?limit=200")
       .then((res) => res.json())
       .then((data) => setGames(data))
       .catch((err) => console.log("Genre is not found", err))
@@ -50,14 +50,14 @@ const App = () => {
       </div>
 
       {/* body */}
-      <div className="pt-[80px] flex z-10">
+      <div className="md:pt-[60px] pt-[67px] flex z-10">
         {/* sideBar */}
-        <div className={`w-[11.5rem] p-4 fixed top-[80px] h-[calc(100vh-80px)] overflow-auto    border-t border-l border-r ${mode? "border-light":"border-dark" } `}>
+        <div className={`hidden lg:block w-[12.5rem] p-4 fixed   h-[calc(100vh-80px)] overflow-auto    border-t border-l border-r ${mode? "border-light":"border-dark" } `}>
           <SideBar games={game} setSelectedGenre={setSelectedGenre } mode = {mode}/>
         </div>
 
         {/* main body */}
-        <div   className={`ml-[11.4rem] flex-1 overflow-auto p-6 pt-2 border-t border-l border-r  ${
+        <div   className={`lg:ml-[12.4rem]  flex-1 overflow-auto p-3 md:p-6 pt-2 border-t border-l border-r  ${
     mode ? "border-light" : "border-dark"
   }`}>
           <MainContent content={game} selectedGenre={selectedGenre} searchTerm={searchTerm} mode={mode}/>
