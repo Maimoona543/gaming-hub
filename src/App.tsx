@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import Menu from './components/Menu'
-import SideBar from './components/sideBar'
-import MainContent from './components/mainContent'
+import SideBar from './components/SideBar'
+import MainContent from './components/MainContent'
 import Particles from './components/Particles'
 
 interface Game {
