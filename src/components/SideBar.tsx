@@ -1,4 +1,4 @@
-import React from 'react'
+
 import layer from '../assets/layer.png'
 import lightLayer from '../assets/lightLayer.png'
 interface GameGenre{

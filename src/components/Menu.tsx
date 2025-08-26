@@ -1,4 +1,4 @@
-import React from 'react'
+
 import menuIcon from '../assets/menuIcon.png'
 import magnifier from '../assets/magnifier.png'
 import moon from '../assets/moon.png'
@@ -36,7 +36,7 @@ const Menu = ({ setSearchTerm, mode, toggleMode }: MenuProps) => {
   <input
     className={`
       w-full h-[42px] md:h-[48px] rounded-full 
-      pl-10 sm:pl-12 md:pl-12 pr-4   xs:pl-14     /* increased padding-left on small+ screens */
+      pl-10 sm:pl-12 md:pl-12 pr-4       /* increased padding-left on small+ screens */
       focus:outline-none focus:ring-2 focus:ring-[#0B074D]
       focus:shadow-[0_0_20px_#3024D7]
       hover:shadow-[0_0_20px_#3024D7]

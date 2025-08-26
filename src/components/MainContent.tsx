@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import windows from '../assets/windows.png'
 import web from '../assets/web.png'
 import { TypeAnimation } from "react-type-animation";
