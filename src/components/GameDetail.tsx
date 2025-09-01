@@ -70,7 +70,7 @@ return (
         rel="noreferrer"
         className="underline hover:text-gray-200"
       >
-        <strong>Link</strong> {selectedGame.title}
+        <strong>Link:</strong> {selectedGame.title}
       </a>
     </div>
   </div>
