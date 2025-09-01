@@ -105,7 +105,7 @@ const App = () => {
           />
 
           {/* Game detail page → only game detail + particles in background */}
-          <Route path="/game/:id" element={ <GameDetail  className = "flex justify-center items-center" game={game}  mode={mode}/>}/>
+          <Route path="/game/:id" element={ <GameDetail  game={game}  mode={mode}/>}/>
         </Routes>
       </div>
     </Router>
