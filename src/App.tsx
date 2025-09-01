@@ -28,7 +28,7 @@ const App = () => {
     const toggleMode = () => setMode(!mode);
 
   useEffect(() => {
-    fetch("https://api.allorigins.win/raw?url=https://www.freetogame.com/api/games?limit=200")
+     fetch("/games.json")
       .then((res) => res.json())
       .then((data) => setGames(data))
       .catch((err) => console.log("Genre is not found", err))
