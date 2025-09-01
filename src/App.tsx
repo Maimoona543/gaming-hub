@@ -1,8 +1,10 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import  { useEffect, useState } from 'react'
 import Menu from './components/Menu'
 import SideBar from './components/SideBar'
 import MainContent from './components/MainContent'
 import Particles from './components/Particles'
+import GameDetail from "./components/GameDetail";
 
 interface Game {
   title: string;
@@ -10,6 +12,11 @@ interface Game {
   thumbnail: string;
   id: number;
   platform: string;
+  game_url:string;
+  developer:string;
+  publisher:string;
+  short_description:string;
+  release_date:string;
 }
 
 const App = () => {
@@ -28,42 +35,80 @@ const App = () => {
   }, [])
 
   return (
-    <div className={`relative z-60  min-h-screen w-screen overflow-hidden  `}>
-      {/* particles background */}
-      <div className={`fixed top-0 left-0 w-full inset-0 -z-20 pointer-events-none  ${mode ? "light-mode" : "dark-mode"}`}>
- <Particles
-  key={mode ? "dark" : "light"}   // 👈 force remount on toggle
-  particleColors={mode ? ['#503188', '#503188']:['#ffffff', '#ffffff']}
-  particleCount={500}
-  particleSpread={10}
-  speed={0.06}
-  particleBaseSize={100}
-  moveParticlesOnHover={true}
-  alphaParticles={0.2}
-  disableRotation={false}
-/>
-      </div>
-    
-      {/* menu */}
-      <div className={`${mode ? "bg-darkCustom" : "bg-lightCustom"}`}>
-        <Menu setSearchTerm={setSearchTerm} mode ={mode} toggleMode={toggleMode}/>
-      </div>
-
-      {/* body */}
-      <div className="md:pt-[60px] pt-[67px] flex z-10">
-        {/* sideBar */}
-        <div className={`hidden lg:block w-[12.5rem] p-4 fixed   h-[calc(100vh-80px)] overflow-auto    border-t border-l border-r ${mode? "border-light":"border-dark" } `}>
-          <SideBar games={game} setSelectedGenre={setSelectedGenre } mode = {mode}/>
+    <Router>
+      <div className="relative z-60 min-h-screen w-screen overflow-hidden">
+        {/* particles background → always shown */}
+        <div
+          className={`fixed top-0 left-0 w-full inset-0 -z-20 pointer-events-none ${
+            mode ? "light-mode" : "dark-mode"
+          }`}
+        >
+          <Particles
+            key={mode ? "dark" : "light"} // 👈 force remount on toggle
+            particleColors={mode ? ["#503188", "#503188"] : ["#ffffff", "#ffffff"]}
+            particleCount={500}
+            particleSpread={10}
+            speed={0.06}
+            particleBaseSize={100}
+            moveParticlesOnHover={true}
+            alphaParticles={0.2}
+            disableRotation={false}
+          />
         </div>
 
-        {/* main body */}
-        <div   className={`lg:ml-[12.4rem]  flex-1 overflow-auto p-3 md:p-6 pt-2 border-t border-l border-r  ${
-    mode ? "border-light" : "border-dark"
-  }`}>
-          <MainContent content={game} selectedGenre={selectedGenre} searchTerm={searchTerm} mode={mode}/>
-        </div>
+        <Routes>
+          {/* Home page */}
+          <Route
+            path="/"
+            element={
+              <>
+                {/* menu */}
+                <div className={`${mode ? "bg-darkCustom" : "bg-lightCustom"}`}>
+                  <Menu
+                    setSearchTerm={setSearchTerm}
+                    mode={mode}
+                    toggleMode={toggleMode}
+                  />
+                </div>
+
+                {/* body */}
+                <div className="md:pt-[60px] pt-[67px] flex z-10">
+                  {/* sideBar */}
+                  <div
+                    className={`hidden lg:block w-[12.5rem] p-4 fixed h-[calc(100vh-80px)] overflow-auto border-t border-l border-r ${
+                      mode ? "border-light" : "border-dark"
+                    }`}
+                  >
+                    <SideBar
+                      games={game}
+                      setSelectedGenre={setSelectedGenre}
+                      mode={mode}
+                    />
+                  </div>
+
+                  {/* main body */}
+                  <div
+                    className={`lg:ml-[12.4rem] flex-1 overflow-auto p-3 md:p-6 pt-2 border-t border-l border-r ${
+                      mode ? "border-light" : "border-dark"
+                    }`}
+                  >
+                    <MainContent
+                      content={game}
+                      selectedGenre={selectedGenre}
+                      searchTerm={searchTerm}
+                      mode={mode}
+                    />
+                  </div>
+                </div>
+              </>
+            }
+          />
+
+          {/* Game detail page → only game detail + particles in background */}
+          <Route path="/game/:id" element={ <GameDetail  className = "flex justify-center items-center" game={game}  mode={mode}/>}/>
+        </Routes>
       </div>
-    </div>
+    </Router>
   )
 }
 

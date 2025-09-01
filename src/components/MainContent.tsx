@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {  useEffect, useState } from 'react'
 import windows from '../assets/windows.png'
 import web from '../assets/web.png'
@@ -21,7 +22,8 @@ mode:boolean
 }
 
 const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) => {
-    const [profile , setProfile]=useState<ProfileProps[]>([])
+  const navigate = useNavigate();
+      const [profile , setProfile]=useState<ProfileProps[]>([])
     const [sortOption , setSortOption] = useState("relevance")
     const [sortPlatform,setSortPlatform] = useState("all platform")
 
@@ -180,6 +182,7 @@ const MainContent = ({content , selectedGenre,searchTerm,mode} : ContentProps) =
     <div
       key={p.id}
       className="transition duration-300  hover:shadow-[0_0_25px_#3024D7] hover:border-[#3024D7] hover:scale-105 md:hover:shadow-[0_0_7px_#838383] hover:border-[#000000] rounded-md overflow-hidden"
+     onClick={() => navigate(`/Game/${p.id}`)}
     >
       {/* card wrapper makes width consistent */}
       <div className="w-full">

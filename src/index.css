@@ -32,7 +32,9 @@
 .border-dark-visible {
   border-color: #2c2c2c !important; /* slightly lighter than background */
 }
-
+.box-shadow{
+  box-shadow: 0 0 3px #3024D7
+}
  .text-shadow-white {
   text-shadow: 0 0 10px #ffffff;
 }

@@ -54,7 +54,7 @@ const Menu = ({ setSearchTerm, mode, toggleMode }: MenuProps) => {
       <div className="flex items-center gap-2 flex-shrink-0">
         <button
           onClick={toggleMode}
-          className={`relative w-[50px] h-[25px] flex items-center rounded-full p-1 transition-colors duration-300
+          className={`relative w-[45px] h-[25px] flex items-center rounded-full p-1 transition-colors duration-300
             ${mode ? "bg-gray-300" : "bg-green-200"}`}
         >
           <div
